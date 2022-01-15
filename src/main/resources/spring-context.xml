@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+        <!--    自动注入 byName:根据属性名找到一摸一样的id所对应的bean  byType:根据属性类型找到一摸一样的id对应的bean   -->
+        <bean id="userDao" class="com.kingyal.factorytest.dao.UserDaoImpl"></bean>
+        <bean id="UserService" class="com.kingyal.factorytest.service.UserServiceImpl" autowire="byName"></bean>
+        <!--   set注入     -->
+        <bean id="Address" class="com.kingyal.usespring.setinjection.Address">
+                <property name="id" value="1"/>
+                <property name="city" value="beijing"/>
+        </bean>
+        <!--   spring注入默认是i单例模式，scope的值为singleton，即都是返回同一个对象；如果改为prototype，则为多例，每次返回的值都不一样     -->
+        <bean id="User" class="com.kingyal.usespring.setinjection.User" scope="prototype">
+                <property name="id" value="10"/>
+                <property name="passwd" value="12345"/>
+                <property name="sex" value="male"/>
+                <property name="age" value="18"/>
+                <property name="bornDate" value="2022/01/15 21:01:01"/>
+                <property name="hobbys">
+                        <array>
+                                <value>pingpong</value>
+                                <value>soccer</value>
+                                <value>footabll</value>
+                                <value>basketball</value>
+                        </array>
+                </property>
+                <property name="phones">
+                        <set>
+                                <value>177xxxxxxxx</value>
+                                <value>152xxxxxxxx</value>
+                                <value>158xxxxxxxx</value>
+                        </set>
+                </property>
+                <property name="names">
+                        <list>
+                                <value>jack</value>
+                                <value>lucy</value>
+                                <value>tom</value>
+                        </list>
+                </property>
+                <property name="countries">
+                        <map>
+                                <entry key="zhongguo" value="china"></entry>
+                                <entry key="yingguo" value="english"></entry>
+                        </map>
+                </property>
+                <property name="properties">
+                        <props>
+                                <prop key="baidu">www.baidu.com</prop>
+                                <prop key="jdbc">com.jdbc.mysql</prop>
+                        </props>
+                </property>
+                <property name="address" ref="Address"/>
+        </bean>
+
+        <!--   构造注入     -->
+        <bean id="Student" class="com.kingyal.usespring.constructinjection.Student">
+
+                <constructor-arg name="id" value="1"/>
+                <constructor-arg name="name" value="tony"/>
+                <constructor-arg name="sex" value="male"/>
+                <constructor-arg name="age" value="18"/>
+        </bean>
+
+        <!--   有些bean无法通过上述三种方式直接获取，因此需要通过工厂bean的方式实现，
+             当从工厂中索要一个bean时，如果时FactoryBean，实际返回的是工厂bean的getObject方法的返回值    -->
+        <bean id="connection" class="com.kingyal.usespring.factorybean.MyConnectionFactoryBean"></bean>
+</beans>
