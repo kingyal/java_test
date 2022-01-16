@@ -10,6 +10,6 @@ public class MyFactoryTest {
     public void test1() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         MyFactory myFactory = new MyFactory("/bean.properties");
         UserDao userDao = (UserDao)myFactory.getBean("UserDao");
-        userDao.deleteUser(10);
+        userDao.deleteUser();
     }
 }

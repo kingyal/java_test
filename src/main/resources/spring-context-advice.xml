@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <bean id="userDao" class="com.kingyal.factorytest.dao.UserDaoImpl"></bean>
+        <!--   目标：原始业务    -->
+        <bean id="userService" class="com.kingyal.factorytest.service.UserServiceImpl" autowire="byName"></bean>
+        <!--  通知：额外功能      -->
+        <bean id="before" class="com.kingyal.useproxy.advice.MyBeforeAdvice"></bean>
+        <bean id="afterreturning" class="com.kingyal.useproxy.advice.MyAfterReturningAdvice"></bean>
+        <bean id="afterrethrows" class="com.kingyal.useproxy.advice.MyThrowsAdvice"></bean>
+        <bean id="interceptor" class="com.kingyal.useproxy.advice.MyInterceptor"></bean>
+        <!--   定义切入点,其实就是编织，告诉我们有哪些额外功能，要放到哪里  -->
+        <aop:config>
+        <!--      切入点  描述方法时需要描述：修饰符，返回值，包.类 .方法名 各个参数的类型         -->
+                <aop:pointcut id="pc_userserviceQuery" expression="execution(* queryUser(Integer))"></aop:pointcut>
+                <aop:pointcut id="pc_userserviceDelete" expression="execution(* deleteUser(Integer))"></aop:pointcut>
+                <aop:pointcut id="pc_userserviceUpdate" expression="execution(* updateUser(Integer))"></aop:pointcut>
+                <aop:pointcut id="pc_userserviceSaver" expression="execution(* saverUser(Integer))"></aop:pointcut>
+        <!--       组装         -->
+                <aop:advisor advice-ref="before" pointcut-ref="pc_userserviceQuery"></aop:advisor>
+                <aop:advisor advice-ref="afterreturning" pointcut-ref="pc_userserviceDelete"></aop:advisor>
+                <aop:advisor advice-ref="afterrethrows" pointcut-ref="pc_userserviceUpdate"></aop:advisor>
+                <aop:advisor advice-ref="interceptor" pointcut-ref="pc_userserviceSaver"></aop:advisor>
+        </aop:config>
+
+</beans>

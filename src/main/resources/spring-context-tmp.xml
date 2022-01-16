@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+        <!--    自动注入 byName:根据属性名找到一摸一样的id所对应的bean  byType:根据属性类型找到一摸一样的id对应的bean   -->
+        <bean id="userDao" class="com.kingyal.factorytest.dao.UserDaoImpl"></bean>
+        <bean id="UserService" class="com.kingyal.factorytest.service.UserServiceImpl" autowire="byName"></bean>
+
+        <!--    init-method可以设置初始化方法，该方法发生在构造方法与set方法之后；destroy-method可以设置摧毁方法，该方法发生在bean销毁之前。
+            bean的生命周期：构造方法，set方法，初始化方法，销毁方法-->
+        <bean id="Address" class="com.kingyal.usespring.setinjection.Address" init-method="init_address" destroy-method="destroy_address">
+                <property name="id" value="1"/>
+                <property name="city" value="beijing"/>
+        </bean>
+
+        <!--   后处理器     -->
+        <bean class="com.kingyal.usespring.PostProcess.MyBeanPostProcessor"></bean>
+</beans>

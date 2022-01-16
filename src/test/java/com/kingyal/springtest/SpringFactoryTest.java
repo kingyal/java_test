@@ -59,4 +59,10 @@ public class SpringFactoryTest {
         resultSet.next();
         System.out.println(resultSet.getInt("Population"));
     }
+
+    @Test
+    public void test6() {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context-tmp.xml");
+        context.close();
+    }
 }
