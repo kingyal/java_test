@@ -31,5 +31,6 @@
     <mappers>
         <mapper resource="com/kingyal/usemybatis/dao/UserDaoMapper.xml"/>
         <mapper resource="com/kingyal/usemybatis/dao/StudentDaoMapper.xml"/>
+        <mapper resource="com/kingyal/usemybatis/dao/PassengerDaoMapper.xml"/>
     </mappers>
 </configuration>

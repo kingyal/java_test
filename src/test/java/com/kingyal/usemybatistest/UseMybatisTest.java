@@ -1,9 +1,12 @@
 package com.kingyal.usemybatistest;
 
+import com.kingyal.usemybatis.entity.Passenger;
+import com.kingyal.usemybatis.dao.PassengerDAO;
 import com.kingyal.usemybatis.dao.StudentDao;
 import com.kingyal.usemybatis.dao.UserDao;
 import com.kingyal.usemybatis.entity.Student;
 import com.kingyal.usemybatis.entity.User;
+import com.kingyal.usemybatis.util.MyBatisUtil;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -29,6 +32,9 @@ public class UseMybatisTest {
         // 通过sqlsession获取DAO创建类的对象
         UserDao userDao = sqlSession.getMapper(UserDao.class);
         // 查询数据
+        System.out.println("=================user0=================");
+        User user0 = userDao.queryUserIdByMap(1);
+        System.out.println(user0);
         System.out.println("=================user1=================");
         User user1 = userDao.queryUserId(1);
         System.out.println(user1);
@@ -92,5 +98,21 @@ public class UseMybatisTest {
         Student student1 = new Student(null, "tony", true);
         studentDao.insertStudent(student1);
         sqlSession.commit();
+    }
+
+    @Test
+    public void test3() {
+        StudentDao studentDao = MyBatisUtil.getMapper(StudentDao.class);
+        Student student = new Student("null", "XiaoMing", true);
+        studentDao.insertStudent(student);
+        MyBatisUtil.commit();
+    }
+
+    @Test
+    public void test4() {
+        PassengerDAO mapper = MyBatisUtil.getMapper(PassengerDAO.class);
+        Passenger passenger = mapper.queryPassengerById(1);
+        System.out.println(passenger.toString());
+        System.out.println(passenger.getPassport().toString());
     }
 }

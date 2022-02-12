@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingyal.usemybatis.dao.PassengerDAO">
+    <resultMap id="passenger_passport" type="Passenger">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="sex" property="sex"></result>
+        <result column="birthday" property="birthday"></result>
+        <association property="passport" javaType="Passport">
+            <id column="passid" property="id"></id>
+            <id column="nationality" property="nationality"></id>
+            <id column="expire" property="expire"></id>
+        </association>
+    </resultMap>
+    <select id="queryPassengerById" resultMap="passenger_passport">
+    select t_passengers.id,t_passengers.name,t_passengers.sex,t_passengers.birthday,
+    t_passports.id passid,t_passports.nationality,t_passports.expire
+    from t_passengers join t_passports
+    on t_passengers.id = t_passports.passenger_id
+    where t_passengers.id=#{id};
+    </select>
+</mapper>
