@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingyal.usemybatis.dao.UserDao">
+    <select id="queryUserId" resultType="User">
+        select id,username,password,gender,regist_time as resistTime
+        from t_user
+        where id=#{param1}
+    </select>
+    <select id="queryUserByIdAndUsername" resultType="User">
+        select id,username,password,gender,regist_time as resistTime
+        from t_user
+        where id=#{arg0} and username=#{arg1}
+    </select>
+    <select id="queryUserByIdAndPasswd" resultType="User">
+        select id,username,password,gender,regist_time as resistTime
+        from t_user
+        where id=#{id} and password=#{password}
+    </select>
+    <select id="queryUserByMapIdAndPasswd" resultType="User">
+        select id,username,password,gender,regist_time as resistTime
+        from t_user
+        where id=#{id} and password=#{passwd}
+    </select>
+    <select id="queryUserByUserIdAndPasswd" resultType="User">
+        select id,username,password,gender,regist_time as resistTime
+        from t_user
+        where id=#{id} and password=#{password}
+    </select>
+    <select id="queryUsersBUsername" resultType="User">
+        select id,username,password,gender,regist_time as resistTime
+        from t_user
+        where username like concat('%', #{name}, '%')
+    </select>
+    <delete id="deleteUserById" parameterType="int">
+        delete from t_user
+        where id=#{id}
+    </delete>
+    <update id="updateUser" parameterType="User">
+        update t_user
+        set username=#{username},password=#{password},gender=#{gender},regist_time=#{resistTime}
+        where id=#{id}
+    </update>
+    <insert id="insertUser" parameterType="User">
+        insert into t_user values(#{id},#{username},#{password},#{gender},#{resistTime})
+    </insert>
+    <insert id="insertUserReturnKey" parameterType="User">
+        <selectKey order="AFTER" resultType="int" keyProperty="id">
+            select last_insert_id()
+        </selectKey>
+        insert into t_user values(#{id},#{username},#{password},#{gender},#{resistTime})
+    </insert>
+</mapper>
