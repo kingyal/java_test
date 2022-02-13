@@ -13,6 +13,19 @@
 
     <!-- 定义项目中需要的所有依赖   -->
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>5.1.6.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.1.6.RELEASE</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -52,23 +65,17 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.47</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>5.1.9.RELEASE</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.4.6</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
         </dependency>
     </dependencies>
 
