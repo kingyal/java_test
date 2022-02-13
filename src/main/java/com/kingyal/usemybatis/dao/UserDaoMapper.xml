@@ -19,6 +19,16 @@
         from t_user
         where id=#{param1}
     </select>
+    <select id="queryUser" resultType="User">
+        <include refid="query_user_by_id"></include>
+        where
+        <if test="id!=null">
+            id=#{id}
+        </if>
+        <if  test="username!=null">
+            username=#{username}
+        </if>
+    </select>
     <select id="queryUserId" resultType="User">
         <include refid="query_user_by_id"></include>
         where id=#{param1}

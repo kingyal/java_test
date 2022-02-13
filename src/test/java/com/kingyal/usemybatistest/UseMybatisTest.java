@@ -79,6 +79,20 @@ public class UseMybatisTest {
         sqlSession.commit();
         System.out.println(user9);
     }
+
+    @Test
+    public void test1_1() {
+        UserDao mapper = MyBatisUtil.getMapper(UserDao.class);
+        User user1 = new User();
+        user1.setId(1);
+        User queryUser1 = mapper.queryUser(user1);
+        System.out.println(queryUser1.toString());
+        User user2 = new User();
+        user2.setUsername("mary");
+        User queryUser2 = mapper.queryUser(user1);
+        System.out.println(queryUser2.toString());
+    }
+
     @Test
     public void test2() throws IOException {
         // 加载配置文件
