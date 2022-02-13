@@ -3,6 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--   当我们代码中的属性名与数据库字段不一致时，也可通过resultMap进行映射，而不用as关键字     -->
 <mapper namespace="com.kingyal.usemybatis.dao.UserDao">
+    <sql id="query_user_by_id">
+        select id,username,password,gender,regist_time as resistTime
+        from t_user
+    </sql>
     <resultMap id="user_resultMap" type="User">
         <id column="id" property="id"></id>
         <result column="username" property="username"></result>
@@ -16,13 +20,11 @@
         where id=#{param1}
     </select>
     <select id="queryUserId" resultType="User">
-        select id,username,password,gender,regist_time as resistTime
-        from t_user
+        <include refid="query_user_by_id"></include>
         where id=#{param1}
     </select>
     <select id="queryUserByIdAndUsername" resultType="User">
-        select id,username,password,gender,regist_time as resistTime
-        from t_user
+        <include refid="query_user_by_id"></include>
         where id=#{arg0} and username=#{arg1}
     </select>
     <select id="queryUserByIdAndPasswd" resultType="User">
