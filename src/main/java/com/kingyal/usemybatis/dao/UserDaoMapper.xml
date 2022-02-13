@@ -42,7 +42,19 @@
                 or gender=#{gender}
             </if>
         </where>
+    </select>
 
+    <!--实现and的关系  -->
+    <select id="queryUsersByAnd" resultType="User">
+        <include refid="query_user_by_id"></include>
+        <where>
+            <if  test="username!=null">
+                username=#{username}
+            </if>
+            <if test="gender!=null">
+                and gender=#{gender}
+            </if>
+        </where>
     </select>
 
     <select id="queryUserId" resultType="User">

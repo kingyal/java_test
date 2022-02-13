@@ -114,6 +114,19 @@ public class UseMybatisTest {
     }
 
     @Test
+    public void test1_3() {
+        UserDao mapper = MyBatisUtil.getMapper(UserDao.class);
+        User user2 = new User();
+        user2.setUsername("mary");
+        user2.setGender(true);
+        List<User> users2 = mapper.queryUsers(user2);
+        for(User user :users2) {
+            System.out.println(user);
+        }
+        MyBatisUtil.commit();
+    }
+
+    @Test
     public void test2() throws IOException {
         // 加载配置文件
         InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
