@@ -11,10 +11,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UseMybatisTest {
     @Test
@@ -123,6 +120,46 @@ public class UseMybatisTest {
         for(User user :users2) {
             System.out.println(user);
         }
+        MyBatisUtil.commit();
+    }
+
+    @Test
+    public void test1_4() {
+        UserDao mapper = MyBatisUtil.getMapper(UserDao.class);
+        User user1 = new User();
+        user1.setId(1);
+        User queryUser1 = mapper.queryUser(user1);
+        System.out.println(queryUser1.toString());
+        user1.setPassword("mary_1234");
+        mapper.updateUserBySet(user1);
+        User queryUser2 = mapper.queryUser(user1);
+        System.out.println(queryUser2.toString());
+        MyBatisUtil.commit();
+    }
+
+    @Test
+    public void test1_5() {
+        UserDao mapper = MyBatisUtil.getMapper(UserDao.class);
+        User user1 = new User();
+        user1.setId(2);
+        User queryUser1 = mapper.queryUser(user1);
+        System.out.println(queryUser1.toString());
+        user1.setPassword("shine_1234");
+        mapper.updateUserBySet(user1);
+        User queryUser2 = mapper.queryUser(user1);
+        System.out.println(queryUser2.toString());
+        MyBatisUtil.commit();
+    }
+
+    @Test
+    public void test1_6() {
+        UserDao mapper = MyBatisUtil.getMapper(UserDao.class);
+        User user1 = new User();
+        List<Integer> lists = new ArrayList<Integer>();
+        lists.add(9);
+        lists.add(10);
+        Integer integer = mapper.deleteUsersById(lists);
+        System.out.println(integer);
         MyBatisUtil.commit();
     }
 

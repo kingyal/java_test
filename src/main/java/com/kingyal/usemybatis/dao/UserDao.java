@@ -19,7 +19,10 @@ public interface UserDao {
     List<User> queryUsersBUsername(@Param("name") String name);
     Integer deleteUserById(@Param("id") Integer id);
     Integer updateUser(User user);
+    Integer updateUserBySet(User user);
+    Integer updateUserByTrim(User user);
     Integer insertUser(User user);
+    Integer deleteUsersById(List<Integer> ids);
     // 主键回填
     Integer insertUserReturnKey(User user);
 }
