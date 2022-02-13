@@ -1,11 +1,7 @@
 package com.kingyal.usemybatistest;
 
-import com.kingyal.usemybatis.entity.Passenger;
-import com.kingyal.usemybatis.dao.PassengerDAO;
-import com.kingyal.usemybatis.dao.StudentDao;
-import com.kingyal.usemybatis.dao.UserDao;
-import com.kingyal.usemybatis.entity.Student;
-import com.kingyal.usemybatis.entity.User;
+import com.kingyal.usemybatis.dao.*;
+import com.kingyal.usemybatis.entity.*;
 import com.kingyal.usemybatis.util.MyBatisUtil;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -114,5 +110,21 @@ public class UseMybatisTest {
         Passenger passenger = mapper.queryPassengerById(1);
         System.out.println(passenger.toString());
         System.out.println(passenger.getPassport().toString());
+    }
+
+    @Test
+    public void test5() {
+        DepartmentDAO mapper = MyBatisUtil.getMapper(DepartmentDAO.class);
+        Department department = mapper.queryDepartmentById(1);
+        System.out.println(department.toString());
+        System.out.println(department.getEmployees());
+    }
+
+    @Test
+    public void test6() {
+        EmployeeDAO mapper = MyBatisUtil.getMapper(EmployeeDAO.class);
+        Employee employee = mapper.queryEmployeeById(1);
+        System.out.println(employee.toString());
+        System.out.println(employee.getDepartment().toString());
     }
 }
