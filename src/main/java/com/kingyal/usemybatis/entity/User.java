@@ -6,7 +6,7 @@ public class User {
     private Integer id;
     private String username;
     private String password;
-    private boolean gender;
+    private Boolean gender;
     private Date resistTime;
 
     public User() {
@@ -44,11 +44,11 @@ public class User {
         this.password = password;
     }
 
-    public boolean isGender() {
+    public Boolean isGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(Boolean gender) {
         this.gender = gender;
     }
 

@@ -89,8 +89,28 @@ public class UseMybatisTest {
         System.out.println(queryUser1.toString());
         User user2 = new User();
         user2.setUsername("mary");
-        User queryUser2 = mapper.queryUser(user1);
+        User queryUser2 = mapper.queryUser(user2);
         System.out.println(queryUser2.toString());
+    }
+
+    @Test
+    public void test1_2() {
+        UserDao mapper = MyBatisUtil.getMapper(UserDao.class);
+        User user1 = new User();
+        user1.setUsername("mary");
+        List<User> users1 = mapper.queryUsers(user1);
+        for(User user :users1) {
+            System.out.println(user);
+        }
+        System.out.println("***********************************");
+        User user2 = new User();
+        user2.setUsername("mary");
+        user2.setGender(true);
+        List<User> users2 = mapper.queryUsers(user2);
+        for(User user :users2) {
+            System.out.println(user);
+        }
+        MyBatisUtil.commit();
     }
 
     @Test

@@ -19,6 +19,7 @@
         from t_user
         where id=#{param1}
     </select>
+
     <select id="queryUser" resultType="User">
         <include refid="query_user_by_id"></include>
         where
@@ -29,6 +30,19 @@
             username=#{username}
         </if>
     </select>
+
+    <!-- 当性别为空时，按用户名去查，否则按照用户名或者性别去查，即实现or的关系，使用这种方式时必须确保用户名不能为空  -->
+    <select id="queryUsers" resultType="User">
+        <include refid="query_user_by_id"></include>
+        where
+        <if  test="username!=null">
+            username=#{username}
+        </if>
+        <if test="gender!=null">
+            or gender=#{gender}
+        </if>
+    </select>
+
     <select id="queryUserId" resultType="User">
         <include refid="query_user_by_id"></include>
         where id=#{param1}
