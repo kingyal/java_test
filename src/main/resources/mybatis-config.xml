@@ -5,6 +5,9 @@
 <configuration>
     <!--  导入外部文件，将使用到这个文件中的参数  -->
     <properties resource="jdbc.properties"></properties>
+    <settings>
+        <setting name="cacheEnabled" value="true"/> <!--    开启全局缓存    -->
+    </settings>
     <!--  实体别名  -->
     <typeAliases>
         <!--    实体别名的两种方式：1.使用typeAliases   2.使用package指定实体类所在的包，每个实体类都会自动注册一个名为类名的别名    -->

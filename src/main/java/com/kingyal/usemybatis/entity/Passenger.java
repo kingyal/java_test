@@ -1,8 +1,9 @@
 package com.kingyal.usemybatis.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Passenger {
+public class Passenger implements Serializable {
     private Integer id;
     private String name;
     private Boolean sex;

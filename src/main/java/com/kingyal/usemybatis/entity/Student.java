@@ -1,6 +1,8 @@
 package com.kingyal.usemybatis.entity;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     String id;
     String name;
     boolean gender;

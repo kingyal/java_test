@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--   当我们代码中的属性名与数据库字段不一致时，也可通过resultMap进行映射，而不用as关键字     -->
 <mapper namespace="com.kingyal.usemybatis.dao.UserDao">
+    <cache/>
     <sql id="query_user_by_id">
         select id,username,password,gender,regist_time as resistTime
         from t_user

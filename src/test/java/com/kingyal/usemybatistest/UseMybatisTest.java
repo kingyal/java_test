@@ -211,4 +211,39 @@ public class UseMybatisTest {
         System.out.println(employee.toString());
         System.out.println(employee.getDepartment().toString());
     }
+
+    @Test
+    public void test7() {
+        SqlSession sqlSession = MyBatisUtil.openSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        mapper.queryUsers(new User());
+        System.out.println("********************");
+        mapper.queryUsers(new User());
+        sqlSession.close();
+    }
+
+    @Test
+    public void test8() {
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        SqlSession sqlSession1 = MyBatisUtil.getSession();
+        SqlSession sqlSession2 = MyBatisUtil.getSession();
+
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        mapper.queryUsers(new User());
+        sqlSession.close();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
+        SqlSession sqlSession0 = MyBatisUtil.getSession();
+        UserDao mapper0 = sqlSession0.getMapper(UserDao.class);
+        mapper0.deleteUserById(1);
+        sqlSession0.commit();
+        sqlSession0.close();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
+        UserDao mapper1 = sqlSession1.getMapper(UserDao.class);
+        mapper1.queryUsers(new User());
+        sqlSession1.close();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
+        UserDao mapper2 = sqlSession2.getMapper(UserDao.class);
+        mapper2.queryUsers(new User());
+        sqlSession2.close();
+    }
 }
