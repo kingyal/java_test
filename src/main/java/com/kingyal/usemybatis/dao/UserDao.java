@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface UserDao {
     User queryUser(User user);
+    List<User> queryAllUser();
     List<User> queryUsers(User user);
     List<User> queryUsersByAnd(User user);
     User queryUserIdByMap(Integer id);

@@ -14,6 +14,10 @@
 <!--        <typeAlias type="com.kingyal.usemybatis.entity.User" alias="User"></typeAlias>-->
         <package name="com.kingyal.usemybatis.entity"/>
     </typeAliases>
+    <plugins>
+        <!--   mybatis安装分页插件pagehelper     -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
     <!-- 核心配置信息   -->
     <environments default="mybatisConfig">
         <!--    数据库相关配置    -->
@@ -21,10 +25,18 @@
         <!--     事务控制类型       -->
             <transactionManager type="jdbc"></transactionManager>
             <!--      数据连接参数      -->
-            <dataSource type="org.apache.ibatis.datasource.pooled.PooledDataSourceFactory">
-                <property name="driver" value="${jdbc.driver}"/>
+<!--            <dataSource type="org.apache.ibatis.datasource.pooled.PooledDataSourceFactory">-->
+<!--                <property name="driver" value="${jdbc.driver}"/>-->
+<!--                &lt;!&ndash; &转义&amp; &ndash;&gt;-->
+<!--                <property name="url" value="${jdbc.url}"/>-->
+<!--                <property name="username" value="${jdbc.username}"/>-->
+<!--                <property name="password" value="${jdbc.password}"/>-->
+<!--            </dataSource>-->
+            <!--      Druid数据连接参数      -->
+            <dataSource type="com.kingyal.usedruid.MyDruidDataSourceFactory">
+                <property name="driverClass" value="${jdbc.driver}"/>
                 <!-- &转义&amp; -->
-                <property name="url" value="${jdbc.url}"/>
+                <property name="jdbcUrl" value="${jdbc.url}"/>
                 <property name="username" value="${jdbc.username}"/>
                 <property name="password" value="${jdbc.password}"/>
             </dataSource>

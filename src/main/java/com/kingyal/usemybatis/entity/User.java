@@ -45,7 +45,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Boolean isGender() {
+    public Boolean getGender() {
         return gender;
     }
 

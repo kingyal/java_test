@@ -1,5 +1,7 @@
 package com.kingyal.usemybatistest;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.kingyal.usemybatis.dao.*;
 import com.kingyal.usemybatis.entity.*;
 import com.kingyal.usemybatis.util.MyBatisUtil;
@@ -245,5 +247,31 @@ public class UseMybatisTest {
         UserDao mapper2 = sqlSession2.getMapper(UserDao.class);
         mapper2.queryUsers(new User());
         sqlSession2.close();
+    }
+
+    @Test
+    public void test9() {
+        UserDao mapper = MyBatisUtil.getMapper(UserDao.class);
+        // 在查询前，设置分页，这里查询第一页，每页2条数据,PageHelper对其之后的第一个查询，进行分页功能的追加
+        PageHelper.startPage(1,2);
+        List<User> users = mapper.queryUsers(new User());
+        for (User user : users) {
+            System.out.println(user);
+        }
+        // 可以将查询接结果封装到PageInfo对象中，便于以后使用
+        PageInfo<User> pageInfo = new PageInfo<User>(users);
+    }
+
+    @Test
+    public void test10() {
+        UserDao mapper = MyBatisUtil.getMapper(UserDao.class);
+        // 在查询前，设置分页，这里查询第一页，每页2条数据,PageHelper对其之后的第一个查询，进行分页功能的追加
+        PageHelper.startPage(1,2);
+        List<User> users = mapper.queryAllUser();
+        for (User user : users) {
+            System.out.println(user);
+        }
+        // 可以将查询接结果封装到PageInfo对象中，便于以后使用
+        PageInfo<User> pageInfo = new PageInfo<User>(users);
     }
 }
