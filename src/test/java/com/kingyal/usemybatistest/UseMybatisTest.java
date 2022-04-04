@@ -3,8 +3,10 @@ package com.kingyal.usemybatistest;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kingyal.usemybatis.dao.*;
+import com.kingyal.usemybatis.daotemp.UserDaoAnnotation;
 import com.kingyal.usemybatis.entity.*;
 import com.kingyal.usemybatis.util.MyBatisUtil;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -273,5 +275,35 @@ public class UseMybatisTest {
         }
         // 可以将查询接结果封装到PageInfo对象中，便于以后使用
         PageInfo<User> pageInfo = new PageInfo<User>(users);
+    }
+
+    @Test
+    public void test11() {
+        UserDaoAnnotation mapper = MyBatisUtil.getMapper(UserDaoAnnotation.class);
+        List<User> users = mapper.queryAllUsers();
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void test12() {
+        UserDaoAnnotation mapper = MyBatisUtil.getMapper(UserDaoAnnotation.class);
+        System.out.println("**********query**********");
+        User user1 = mapper.queryUserId(2);
+        System.out.println(user1);
+        System.out.println("**********delete**********");
+        mapper.deleteUserById(2);
+        user1 = mapper.queryUserId(2);
+        System.out.println(user1);
+        System.out.println("**********insert**********");
+        Integer user_temp = mapper.insertUser(new User(2, "user_temp", "temp_000", true, new Date()));
+        user1 = mapper.queryUserId(2);
+        System.out.println(user1);
+        System.out.println("**********update**********");
+        mapper.updateUser(new User(2, "user_temp_1", "temp_111", true, new Date()));
+        user1 = mapper.queryUserId(2);
+        System.out.println(user1);
+        MyBatisUtil.commit();
     }
 }

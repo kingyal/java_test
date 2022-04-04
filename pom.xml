@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <!--  项目类型：jar/war  -->
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <!-- 定义项目中需要的所有依赖   -->
     <dependencies>
